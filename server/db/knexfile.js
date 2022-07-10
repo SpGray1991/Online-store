@@ -1,5 +1,7 @@
+require("dotenv").config();
+
 module.exports = {
-  test: {
+  /* test: {
     client: "mysql2",
     connection: process.env.DB_CONNECTION,
 
@@ -9,19 +11,19 @@ module.exports = {
     seeds: {
       directory: __dirname + "/db/seeds/test",
     },
+  }, */
+
+  client: "mysql2",
+  connection:
+    /* process.env.DB_CONNECTION */ "mysql://root:z1x2c3v4@localhost:3306/online_store?charset=utf8mb4&multipleStatements=true",
+  migrations: {
+    tableName: "migrations",
   },
-  development: {
-    client: "mysql2",
-    connection:
-      "mysql://root:z1x2c3v4@localhost:3306/online_store?charset=utf8mb4&multipleStatements=true",
-    migrations: {
-      directory: __dirname + "/db/migrations",
-    },
-    seeds: {
-      directory: __dirname + "/db/seeds/development",
-    },
+  seeds: {
+    directory: __dirname + "/db/seeds/test",
   },
-  production: {
+
+  /* production: {
     client: "mysql2",
     connection: process.env.DB_CONNECTION,
     migrations: {
@@ -30,5 +32,5 @@ module.exports = {
     seeds: {
       directory: __dirname + "/db/seeds/production",
     },
-  },
+  }, */
 };
