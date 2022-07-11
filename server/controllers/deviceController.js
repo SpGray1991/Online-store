@@ -18,16 +18,16 @@ class DeviceController {
         img: fileName,
       });
 
-      /* if (info) {
+      if (info) {
         info = JSON.parse(info);
         info.forEach((i) =>
-          DeviceInfo.create({
+          DeviceInfo.query().insert({
             title: i.title,
             description: i.description,
-            deviceId: device.id,
+            device_id: device.id,
           })
         );
-      } */
+      }
 
       return res.json(device);
     } catch (e) {
@@ -72,10 +72,13 @@ class DeviceController {
 
   async getOne(req, res) {
     const { id } = req.params;
-    const device = await Device.findOne({
-      where: { id },
-      include: [{ model: DeviceInfo, as: "info" }],
-    });
+    const device = await Device.query().findById(id);
+
+    const info = Array.from(DeviceInfo.query());
+    console.log(info);
+
+    device["info"] = info;
+
     return res.json(device);
   }
 }
