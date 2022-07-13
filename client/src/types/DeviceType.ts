@@ -11,13 +11,19 @@
 
 export interface IDevice {
   id: number;
+  name: string;
+  price: number;
+  rating: number;
+  img: string;
 }
 
 export interface IBrand {
   id: number;
+  name: string;
 }
 export interface IType {
   id: number;
+  name: string;
 }
 
 /* export interface MovieCardProps {
@@ -31,6 +37,8 @@ export interface DeviceState {
   devices: IDevice[];
   brands: IBrand[];
   types: IType[];
+  selectedType: any;
+  selectedBrand: any;
 }
 
 export enum DeviceActionTypes {
@@ -40,6 +48,10 @@ export enum DeviceActionTypes {
   SET_BRANDS = "SET_BRANDS",
   GET_TYPES = "GET_TYPES",
   SET_TYPES = "SET_TYPES",
+  GET_SELECTED_TYPE = "GET_SELECTED_TYPE",
+  SET_SELECTED_TYPE = "SET_SELECTED_TYPE",
+  GET_SELECTED_BRAND = "GET_SELECTED_BRAND",
+  SET_SELECTED_BRAND = "SET_SELECTED_BRAND",
 }
 
 interface GetDevicesAction {
@@ -72,10 +84,32 @@ interface SetTypesAction {
   payload: IType[];
 }
 
+interface GetSelectedTypeAction {
+  type: DeviceActionTypes.GET_SELECTED_TYPE;
+  payload: IType;
+}
+interface SetSelectedTypeAction {
+  type: DeviceActionTypes.SET_SELECTED_TYPE;
+  payload: IType;
+}
+
+interface GetSelectedBrandAction {
+  type: DeviceActionTypes.GET_SELECTED_BRAND;
+  payload: {};
+}
+interface SetSelectedBrandAction {
+  type: DeviceActionTypes.SET_SELECTED_BRAND;
+  payload: {};
+}
+
 export type DeviceAction =
   | GetDevicesAction
   | SetDevicesAction
   | GetBrandsAction
   | SetBrandsAction
   | GetTypesAction
-  | SetTypesAction;
+  | SetTypesAction
+  | GetSelectedTypeAction
+  | SetSelectedTypeAction
+  | GetSelectedBrandAction
+  | SetSelectedBrandAction;

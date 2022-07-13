@@ -5,8 +5,6 @@ import { authRoutes, publicRoutes } from "../routes";
 const AppRouter = () => {
   const { user, isAuth } = useTypedSelector((state) => state.user);
 
-  console.log("120-29", isAuth);
-
   return (
     <Routes>
       {isAuth &&
