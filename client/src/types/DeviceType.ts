@@ -11,7 +11,7 @@
 
 export interface ModalProps {
   show: boolean;
-  onHide: any;
+  onHide: () => void;
 }
 
 export interface IDevice {
@@ -27,8 +27,8 @@ export interface IBrand {
   name: string;
 }
 export interface IType {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 /* export interface MovieCardProps {
@@ -42,7 +42,7 @@ export interface DeviceState {
   devices: IDevice[];
   brands: IBrand[];
   types: IType[];
-  selectedType: any;
+  selectedType: IType;
   selectedBrand: any;
 }
 

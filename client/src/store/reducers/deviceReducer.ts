@@ -89,7 +89,7 @@ export const deviceReducer = (
         devices: action.payload,
         types: [],
         brands: [],
-        selectedType: [],
+        selectedType: {},
         selectedBrand: [],
       };
 
@@ -101,7 +101,7 @@ export const deviceReducer = (
         devices: [],
         types: [],
         brands: action.payload,
-        selectedType: [],
+        selectedType: {},
         selectedBrand: [],
       };
 
@@ -113,7 +113,7 @@ export const deviceReducer = (
         devices: [],
         types: action.payload,
         brands: [],
-        selectedType: [],
+        selectedType: {},
         selectedBrand: [],
       };
 
