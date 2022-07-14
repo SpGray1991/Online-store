@@ -6,11 +6,20 @@ import Button from "react-bootstrap/Button";
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../../utils/consts";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
+import { useActions } from "../../hooks/useActions";
 
 const NavBar = () => {
   const { user, isAuth } = useTypedSelector((state) => state.user);
 
   const navigate = useNavigate();
+
+  const { setUser, setIsAuth } = useActions();
+
+  const logOut = () => {
+    localStorage.clear();
+    setUser([]);
+    setIsAuth(false);
+  };
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -28,7 +37,7 @@ const NavBar = () => {
             </Button>
             <Button
               variant={"outline-light"}
-              onClick={() => navigate(LOGIN_ROUTE)}
+              onClick={() => logOut()}
               className="ms-2"
             >
               Выйти

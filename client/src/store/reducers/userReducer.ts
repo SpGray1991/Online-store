@@ -2,7 +2,7 @@ import { UserAction, UserActionTypes, UserState } from "../../types/UserType";
 
 const initialState: UserState = {
   user: [],
-  isAuth: true,
+  isAuth: false,
 };
 
 export const userReducer = (

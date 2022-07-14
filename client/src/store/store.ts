@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { rootReducer } from "./reducers/rootReducer";
 
-/* const saveToLocalStorage = (state: any) => {
+const saveToLocalStorage = (state: any) => {
   try {
     localStorage.setItem("state", JSON.stringify(state));
   } catch (e) {
@@ -20,15 +20,12 @@ const loadFromLocalStorage = () => {
   }
 };
 
-const persistedStore = loadFromLocalStorage(); */
+const persistedStore = loadFromLocalStorage();
 
-const store = createStore(
-  rootReducer,
-  /* persistedStore,  */ applyMiddleware(thunk)
-);
+const store = createStore(rootReducer, persistedStore, applyMiddleware(thunk));
 
-/* store.subscribe(() => {
+store.subscribe(() => {
   saveToLocalStorage(store.getState());
-}); */
+});
 
 export default store;
