@@ -9,6 +9,11 @@
   tagline: string;
 } */
 
+export interface ModalProps {
+  show: boolean;
+  onHide: any;
+}
+
 export interface IDevice {
   id: number;
   name: string;
