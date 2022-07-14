@@ -14,6 +14,12 @@ export interface ModalProps {
   onHide: () => void;
 }
 
+export interface Info {
+  title?: string;
+  description?: string;
+  number?: number;
+}
+
 export interface IDevice {
   id: number;
   name: string;

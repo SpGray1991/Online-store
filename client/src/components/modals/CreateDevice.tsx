@@ -3,6 +3,7 @@ import Modal, { ModalProps } from "react-bootstrap/Modal";
 import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
+import { Info } from "../../types/DeviceType";
 
 /* import {
   createDevice,
@@ -36,7 +37,7 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [file, setFile] = useState(null);
-  const [info, setInfo] = useState<any>([]);
+  const [info, setInfo] = useState<Info[]>([]);
 
   /* useEffect(() => {
     fetchTypes().then((data) => device.setTypes(data));
@@ -46,8 +47,8 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
   const addInfo = () => {
     setInfo([...info, { title: "", description: "", number: Date.now() }]);
   };
-  const removeInfo = (number: any) => {
-    setInfo(info.filter((i: any) => i.number !== number));
+  const removeInfo = (number?: number) => {
+    setInfo(info.filter((i) => i.number !== number));
   };
   /* const changeInfo = (key, value, number) => {
     setInfo(
@@ -130,7 +131,7 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
           <Button variant={"outline-dark"} onClick={addInfo}>
             Добавить новое свойство
           </Button>
-          {info.map((i: any) => (
+          {info.map((i) => (
             <Row className="mt-4" key={i.number}>
               <Col md={4}>
                 <Form.Control
