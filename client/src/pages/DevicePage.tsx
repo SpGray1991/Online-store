@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Image } from "react-bootstrap";
 import bigStar from "../assets/bigStar.png";
 import { useParams } from "react-router-dom";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-/* import { fetchOneDevice } from "../http/deviceAPI"; */
+import { fetchOneDevice } from "../http/deviceApi";
+import { IDevice } from "../types/DeviceType";
 
 const DevicePage = () => {
   /* const { devices, types, brands, selectedType, selectedBrand } =
     useTypedSelector((state) => state.device); */
-
-  const device = {
-    id: 1,
-    name: "Iphone 12 pro",
-    price: 47000,
-    rating: 5,
-    img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-  };
 
   const description = [
     { id: 1, title: "Оперативная память", description: "5 gb" },
@@ -27,17 +19,21 @@ const DevicePage = () => {
 
   /*   const { id, name, price, rating, img } = devices; */
 
-  /*  const [device, setDevice] = useState({ info: [] }); */
-  /* const { id } = useParams(); */
-  /*   useEffect(() => {
-    fetchOneDevice(id).then((data) => setDevice(data));
+  const [device, setDevice] = useState<any>([]);
+  const { id } = useParams();
+  useEffect(() => {
+    fetchOneDevice(id).then((data: IDevice[]) => setDevice(data));
   }, []);
- */
+
   return (
     <Container className="mt-3">
       <div className="row">
         <Col md={3}>
-          <Image width={300} height={300} src={device.img} />
+          <Image
+            width={300}
+            height={300}
+            src={process.env.REACT_APP_API_URL + device.img}
+          />
         </Col>
         <Col md={3}>
           <div className="d-flex flex-column align-items-center">

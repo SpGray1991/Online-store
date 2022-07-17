@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Form, Button } from "react-bootstrap";
 import { ModalProps } from "../../types/DeviceType";
-/* import { createType } from "../../http/deviceAPI"; */
+import { createType } from "../../http/deviceApi";
 
 const CreateType = ({ show, onHide }: ModalProps) => {
   const [value, setValue] = useState("");
-  /* 
+
   const addType = () => {
     createType({ name: value }).then((data) => {
       setValue("");
       onHide();
     });
-  }; */
+  };
 
   return (
     <Modal show={show} onHide={onHide} centered>
@@ -34,7 +34,7 @@ const CreateType = ({ show, onHide }: ModalProps) => {
         <Button variant="outline-danger" onClick={onHide}>
           Закрыть
         </Button>
-        <Button variant="outline-success" /* onClick={addType} */>
+        <Button variant="outline-success" onClick={addType}>
           Добавить
         </Button>
       </Modal.Footer>

@@ -5,36 +5,33 @@ import Col from "react-bootstrap/Col";
 import TypeBar from "../components/TypeBar/TypeBar";
 import BrandBar from "../components/BrandBar/BrandBar";
 import DeviceList from "../components/DeviceList/DeviceList";
-/* import BrandBar from "../components/BrandBar";
-import DeviceList from "../components/DeviceList"; */
-/* import { observer } from "mobx-react-lite"; */
-/* import { Context } from "../index";
-import { fetchBrands, fetchDevices, fetchTypes } from "../http/deviceAPI"; */
-/* import Pages from "../components/Pages"; */
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
+import Pages from "../components/Pages";
 
 const Shop = () => {
-  /* const { device } = useContext(Context); */
+  const {
+    devices,
+    types,
+    brands,
+    selectedType,
+    selectedBrand,
+    page,
+    limit,
+    totalCount,
+  } = useTypedSelector((state) => state.device);
 
-  /* useEffect(() => {
-    fetchTypes().then((data) => device.setTypes(data));
-    fetchBrands().then((data) => device.setBrands(data));
-    fetchDevices(null, null, 1, 2).then((data) => {
-      device.setDevices(data.rows);
-      device.setTotalCount(data.count);
-    });
+  const { setTypes, setBrands, setDevices, setLimit, setPage, setTotalCount } =
+    useActions();
+
+  useEffect(() => {
+    setTypes();
+    setBrands();
   }, []);
- */
-  /*  useEffect(() => {
-    fetchDevices(
-      device.selectedType.id,
-      device.selectedBrand.id,
-      device.page,
-      2
-    ).then((data) => {
-      device.setDevices(data.rows);
-      device.setTotalCount(data.count);
-    });
-  }, [device.page, device.selectedType, device.selectedBrand]); */
+
+  useEffect(() => {
+    setDevices(selectedType.id, selectedBrand.id, page, 3);
+  }, [page, selectedType, selectedBrand]);
 
   return (
     <Container>
@@ -45,7 +42,7 @@ const Shop = () => {
         <Col md={9}>
           <BrandBar />
           <DeviceList />
-          {/* <Pages /> */}
+          <Pages />
         </Col>
       </Row>
     </Container>

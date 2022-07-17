@@ -17,7 +17,7 @@ const DeviceItem = ({ id, name, price, rating, img }: IDevice) => {
         <Image
           width={150}
           height={150}
-          src={/* process.env.REACT_APP_API_URL +  */ img}
+          src={process.env.REACT_APP_API_URL + img}
         />
         <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
           <div>Apple</div>

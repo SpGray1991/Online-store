@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import Modal, { ModalProps } from "react-bootstrap/Modal";
+import Modal from "react-bootstrap/Modal";
 import { Button, Form } from "react-bootstrap";
-/* import { createBrand, createType } from "../../http/deviceAPI"; */
+import { createBrand } from "../../http/deviceApi";
+import { ModalProps } from "../../types/DeviceType";
 
 const CreateBrand = ({ show, onHide }: ModalProps) => {
   const [value, setValue] = useState("");
 
-  /* const addBrand = () => {
+  const addBrand = () => {
     createBrand({ name: value }).then((data) => {
       setValue("");
       onHide();
     });
-  }; */
+  };
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
@@ -32,7 +33,7 @@ const CreateBrand = ({ show, onHide }: ModalProps) => {
         <Button variant="outline-danger" onClick={onHide}>
           Закрыть
         </Button>
-        <Button variant="outline-success" /*  onClick={addBrand} */>
+        <Button variant="outline-success" onClick={addBrand}>
           Добавить
         </Button>
       </Modal.Footer>

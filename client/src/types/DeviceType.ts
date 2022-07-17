@@ -1,14 +1,3 @@
-/* export interface IMovie {
-  id: number;
-  title: string;
-  poster_path: string;
-  release_date: string;
-  vote_average: number;
-  genres: any[];
-  overview: string;
-  tagline: string;
-} */
-
 export interface ModalProps {
   show: boolean;
   onHide: () => void;
@@ -29,27 +18,23 @@ export interface IDevice {
 }
 
 export interface IBrand {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 export interface IType {
   id?: number;
   name?: string;
 }
 
-/* export interface MovieCardProps {
-  title: string;
-  id: number;
-  poster_path: string;
-  vote_average: number;
-} */
-
 export interface DeviceState {
   devices: IDevice[];
   brands: IBrand[];
   types: IType[];
   selectedType: IType;
-  selectedBrand: any;
+  selectedBrand: IBrand;
+  page: number;
+  totalCount: number;
+  limit: number;
 }
 
 export enum DeviceActionTypes {
@@ -63,6 +48,9 @@ export enum DeviceActionTypes {
   SET_SELECTED_TYPE = "SET_SELECTED_TYPE",
   GET_SELECTED_BRAND = "GET_SELECTED_BRAND",
   SET_SELECTED_BRAND = "SET_SELECTED_BRAND",
+  SET_PAGE = "SET_PAGE",
+  SET_TOTAL_COUNT = "SET_TOTAL_COUNT",
+  SET_LIMIT = "SET_LIMIT",
 }
 
 interface GetDevicesAction {
@@ -113,6 +101,21 @@ interface SetSelectedBrandAction {
   payload: {};
 }
 
+interface SetPageAction {
+  type: DeviceActionTypes.SET_PAGE;
+  payload: number;
+}
+
+interface SetTotalCountAction {
+  type: DeviceActionTypes.SET_TOTAL_COUNT;
+  payload: number;
+}
+
+interface SetLimitAction {
+  type: DeviceActionTypes.SET_LIMIT;
+  payload: number;
+}
+
 export type DeviceAction =
   | GetDevicesAction
   | SetDevicesAction
@@ -123,4 +126,7 @@ export type DeviceAction =
   | GetSelectedTypeAction
   | SetSelectedTypeAction
   | GetSelectedBrandAction
-  | SetSelectedBrandAction;
+  | SetSelectedBrandAction
+  | SetLimitAction
+  | SetPageAction
+  | SetTotalCountAction;

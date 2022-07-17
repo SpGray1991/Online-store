@@ -1,48 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
-import Modal, { ModalProps } from "react-bootstrap/Modal";
+import Modal from "react-bootstrap/Modal";
 import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
-import { Info } from "../../types/DeviceType";
-
-/* import {
-  createDevice,
-  fetchBrands,
-  fetchDevices,
-  fetchTypes,
-} from "../../http/deviceAPI"; */
+import { IDevice, Info } from "../../types/DeviceType";
+import { createDevice } from "../../http/deviceApi";
+import { ModalProps } from "../../types/DeviceType";
 
 const CreateDevice = ({ show, onHide }: ModalProps) => {
   const { devices, types, brands, selectedType, selectedBrand } =
     useTypedSelector((state) => state.device);
 
-  const { setSelectedType, setSelectedBrand } = useActions();
-
-  const device = {
-    id: 1,
-    name: "Iphone 12 pro",
-    price: 47000,
-    rating: 5,
-    img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-  };
-
-  const description = [
-    { id: 1, title: "Оперативная память", description: "5 gb" },
-    { id: 2, title: "Камера", description: "12 gb" },
-    { id: 3, title: "Процессор", description: "Пентиум 3" },
-    { id: 4, title: "Кол-во ядер", description: "2" },
-    { id: 5, title: "Аккумулятор", description: "4000" },
-  ];
+  const { setSelectedType, setSelectedBrand, setBrands, setTypes } =
+    useActions();
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState<Info[]>([]);
 
-  /* useEffect(() => {
-    fetchTypes().then((data) => device.setTypes(data));
-    fetchBrands().then((data) => device.setBrands(data));
-  }, []); */
+  useEffect(() => {
+    setTypes();
+    setBrands();
+  }, []);
 
   const addInfo = () => {
     setInfo([...info, { title: "", description: "", number: Date.now() }]);
@@ -50,27 +30,28 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
   const removeInfo = (number?: number) => {
     setInfo(info.filter((i) => i.number !== number));
   };
-  /* const changeInfo = (key, value, number) => {
+  const changeInfo = (key: string, value: string, number?: number) => {
     setInfo(
       info.map((i) => (i.number === number ? { ...i, [key]: value } : i))
     );
-  }; */
+  };
 
-  /*  const selectFile = (e) => {
+  const selectFile = (e: any) => {
     setFile(e.target.files[0]);
-  }; */
+  };
 
-  /* const addDevice = () => {
-    const formData = new FormData();
+  const addDevice = () => {
+    console.log("INFO", info);
+    const formData: any = new FormData();
     formData.append("name", name);
     formData.append("price", `${price}`);
     formData.append("img", file);
-    formData.append("brandId", device.selectedBrand.id);
-    formData.append("typeId", device.selectedType.id);
-    formData.append("info", JSON.stringify(info));
+    formData.append("brand_id", selectedBrand.id);
+    formData.append("type_id", selectedType.id);
+    /* formData.append("info", JSON.stringify(info)); */
     createDevice(formData).then((data) => onHide());
   };
- */
+
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
@@ -123,10 +104,7 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
             placeholder="Введите стоимость устройства"
             type="number"
           />
-          <Form.Control
-            className="mt-3"
-            type="file" /* onChange={selectFile}  */
-          />
+          <Form.Control className="mt-3" type="file" onChange={selectFile} />
           <hr />
           <Button variant={"outline-dark"} onClick={addInfo}>
             Добавить новое свойство
@@ -136,18 +114,18 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
               <Col md={4}>
                 <Form.Control
                   value={i.title}
-                  /* onChange={(e) =>
+                  onChange={(e) =>
                     changeInfo("title", e.target.value, i.number)
-                  } */
+                  }
                   placeholder="Введите название свойства"
                 />
               </Col>
               <Col md={4}>
                 <Form.Control
                   value={i.description}
-                  /* onChange={(e) =>
+                  onChange={(e) =>
                     changeInfo("description", e.target.value, i.number)
-                  } */
+                  }
                   placeholder="Введите описание свойства"
                 />
               </Col>
@@ -167,7 +145,7 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
         <Button variant="outline-danger" onClick={onHide}>
           Закрыть
         </Button>
-        <Button variant="outline-success" /* onClick={addDevice} */>
+        <Button variant="outline-success" onClick={addDevice}>
           Добавить
         </Button>
       </Modal.Footer>

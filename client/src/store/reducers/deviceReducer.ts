@@ -5,78 +5,14 @@ import {
 } from "../../types/DeviceType";
 
 const initialState: DeviceState = {
-  devices: [
-    {
-      id: 1,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 2,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 3,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 4,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 5,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 6,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 7,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-    {
-      id: 8,
-      name: "Iphone 12 pro",
-      price: 47000,
-      rating: 5,
-      img: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8492_0_1_637780305226353417.webp",
-    },
-  ],
-  types: [
-    { id: 1, name: "Холодильники" },
-    { id: 2, name: "Cмартфоны" },
-    { id: 3, name: "Ноутбуки" },
-    { id: 4, name: "Телевизоры" },
-  ],
-  brands: [
-    { id: 1, name: "Samsung" },
-    { id: 2, name: "Apple" },
-    { id: 3, name: "Lenovo" },
-    { id: 4, name: "Asus" },
-  ],
+  devices: [],
+  types: [],
+  brands: [],
   selectedType: {},
   selectedBrand: {},
+  page: 1,
+  totalCount: 0,
+  limit: 3,
 };
 
 export const deviceReducer = (
@@ -86,11 +22,8 @@ export const deviceReducer = (
   switch (action.type) {
     case DeviceActionTypes.GET_DEVICES:
       return {
+        ...state,
         devices: action.payload,
-        types: [],
-        brands: [],
-        selectedType: {},
-        selectedBrand: [],
       };
 
     case DeviceActionTypes.SET_DEVICES:
@@ -98,11 +31,8 @@ export const deviceReducer = (
 
     case DeviceActionTypes.GET_BRANDS:
       return {
-        devices: [],
-        types: [],
+        ...state,
         brands: action.payload,
-        selectedType: {},
-        selectedBrand: [],
       };
 
     case DeviceActionTypes.SET_BRANDS:
@@ -110,11 +40,8 @@ export const deviceReducer = (
 
     case DeviceActionTypes.GET_TYPES:
       return {
-        devices: [],
+        ...state,
         types: action.payload,
-        brands: [],
-        selectedType: {},
-        selectedBrand: [],
       };
 
     case DeviceActionTypes.SET_TYPES:
@@ -142,6 +69,18 @@ export const deviceReducer = (
       return {
         ...state,
         selectedBrand: action.payload,
+      };
+
+    case DeviceActionTypes.SET_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      };
+
+    case DeviceActionTypes.SET_TOTAL_COUNT:
+      return {
+        ...state,
+        totalCount: action.payload,
       };
 
     default:
