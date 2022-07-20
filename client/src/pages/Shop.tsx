@@ -10,16 +10,9 @@ import { useActions } from "../hooks/useActions";
 import Pages from "../components/Pages";
 
 const Shop = () => {
-  const {
-    devices,
-    types,
-    brands,
-    selectedType,
-    selectedBrand,
-    page,
-    limit,
-    totalCount,
-  } = useTypedSelector((state) => state.device);
+  const { selectedType, selectedBrand, page } = useTypedSelector(
+    (state) => state.device
+  );
 
   const { setTypes, setBrands, setDevices, setLimit, setPage, setTotalCount } =
     useActions();
@@ -27,9 +20,6 @@ const Shop = () => {
   useEffect(() => {
     setTypes();
     setBrands();
-  }, []);
-
-  useEffect(() => {
     setDevices(selectedType.id, selectedBrand.id, page, 3);
   }, [page, selectedType, selectedBrand]);
 

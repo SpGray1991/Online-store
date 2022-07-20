@@ -27,7 +27,7 @@ export const deviceReducer = (
       };
 
     case DeviceActionTypes.SET_DEVICES:
-      return { ...state, devices: [...state.devices, ...action.payload] };
+      return { ...state, devices: action.payload };
 
     case DeviceActionTypes.GET_BRANDS:
       return {
@@ -36,7 +36,7 @@ export const deviceReducer = (
       };
 
     case DeviceActionTypes.SET_BRANDS:
-      return { ...state, brands: [...state.brands, ...action.payload] };
+      return { ...state, brands: action.payload };
 
     case DeviceActionTypes.GET_TYPES:
       return {
@@ -45,7 +45,7 @@ export const deviceReducer = (
       };
 
     case DeviceActionTypes.SET_TYPES:
-      return { ...state, types: [...state.types, ...action.payload] };
+      return { ...state, types: action.payload };
 
     case DeviceActionTypes.GET_SELECTED_TYPE:
       return {

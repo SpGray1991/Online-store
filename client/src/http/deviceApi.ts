@@ -23,6 +23,7 @@ export const fetchBrands = async () => {
 };
 
 export const createDevice = async (device: IDevice) => {
+  console.log("RES", device);
   const { data } = await $authHost.post("api/device", device);
   return data;
 };
@@ -46,5 +47,6 @@ export const fetchDevices = async (
 
 export const fetchOneDevice = async (id: string | undefined) => {
   const { data } = await $host.get("api/device/" + id);
+  console.log("1111111111");
   return data;
 };

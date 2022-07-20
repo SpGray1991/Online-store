@@ -1,24 +1,6 @@
-/* export interface IMovie {
-  id: number;
-  title: string;
-  poster_path: string;
-  release_date: string;
-  vote_average: number;
-  genres: any[];
-  overview: string;
-  tagline: string;
-} */
-
 export interface IUser {
   id: number;
 }
-
-/* export interface MovieCardProps {
-  title: string;
-  id: number;
-  poster_path: string;
-  vote_average: number;
-} */
 
 export interface UserState {
   user: IUser[];

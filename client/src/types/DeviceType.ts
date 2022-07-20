@@ -9,12 +9,20 @@ export interface Info {
   number?: number;
 }
 
+export interface Info2 {
+  id?: number;
+  title?: string;
+  description?: string;
+  device_id?: number;
+}
+
 export interface IDevice {
   id: number;
   name: string;
   price: number;
   rating: number;
   img: string;
+  info: Info[];
 }
 
 export interface IBrand {

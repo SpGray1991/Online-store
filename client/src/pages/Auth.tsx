@@ -1,8 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Container, Form } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
+import { useState } from "react";
+import { Container, Form, Card, Button } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userApi";
@@ -17,7 +14,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user, isAuth } = useTypedSelector((state) => state.user);
+  const { user } = useTypedSelector((state) => state.user);
 
   const { setUser, setIsAuth } = useActions();
 

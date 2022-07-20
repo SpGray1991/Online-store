@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Image } from "react-bootstrap";
 import bigStar from "../assets/bigStar.png";
 import { useParams } from "react-router-dom";
 import { fetchOneDevice } from "../http/deviceApi";
-import { IDevice } from "../types/DeviceType";
+import { IDevice, Info2 } from "../types/DeviceType";
 
 const DevicePage = () => {
-  /* const { devices, types, brands, selectedType, selectedBrand } =
-    useTypedSelector((state) => state.device); */
+  const [device, setDevice] = useState<any>({ info: [] });
 
-  const description = [
-    { id: 1, title: "Оперативная память", description: "5 gb" },
-    { id: 2, title: "Камера", description: "12 gb" },
-    { id: 3, title: "Процессор", description: "Пентиум 3" },
-    { id: 4, title: "Кол-во ядер", description: "2" },
-    { id: 5, title: "Аккумулятор", description: "4000" },
-  ];
-
-  /*   const { id, name, price, rating, img } = devices; */
-
-  const [device, setDevice] = useState<any>([]);
   const { id } = useParams();
+
   useEffect(() => {
+    console.log("RES");
     fetchOneDevice(id).then((data: IDevice[]) => setDevice(data));
   }, []);
+
+  const arr = device.info;
+  console.log("TESTSST", arr);
 
   return (
     <Container className="mt-3">
@@ -69,16 +62,16 @@ const DevicePage = () => {
       </div>
       <div className="d-flex flex-column m-3">
         <h1>Характеристики</h1>
-        {description.map((info, index) => (
+        {arr.map((i: Info2, index: number) => (
           <div
             className="row d-flex "
-            key={info.id}
+            key={i.id}
             style={{
               background: index % 2 === 0 ? "lightgray" : "transparent",
               padding: 10,
             }}
           >
-            {info.title}: {info.description}
+            {i.title}: {i.description}
           </div>
         ))}
       </div>

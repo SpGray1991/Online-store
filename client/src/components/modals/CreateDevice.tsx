@@ -48,7 +48,10 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
     formData.append("img", file);
     formData.append("brand_id", selectedBrand.id);
     formData.append("type_id", selectedType.id);
-    /* formData.append("info", JSON.stringify(info)); */
+    formData.append("info", JSON.stringify(info));
+
+    console.log("Test", formData.get("info"));
+
     createDevice(formData).then((data) => onHide());
   };
 

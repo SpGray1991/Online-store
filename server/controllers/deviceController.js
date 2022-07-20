@@ -10,6 +10,9 @@ class DeviceController {
       const { img } = req.files;
       let fileName = uuid.v4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
+
+      console.log("device", name);
+
       const device = await Device.query().insert({
         name,
         price,
@@ -19,14 +22,15 @@ class DeviceController {
       });
 
       if (info) {
-        info = JSON.parse(info);
-        info.forEach((i) =>
-          DeviceInfo.query().insert({
+        const infoArr = JSON.parse(info);
+
+        await infoArr.map(async (i) => {
+          await DeviceInfo.query().insert({
             title: i.title,
             description: i.description,
             device_id: device.id,
-          })
-        );
+          });
+        });
       }
 
       return res.json(device);
@@ -74,7 +78,9 @@ class DeviceController {
     const { id } = req.params;
     const device = await Device.query().findById(id);
 
-    const info = Array.from(DeviceInfo.query());
+    const info = Array.from(
+      await DeviceInfo.query().where("device_id", "=", id)
+    );
     console.log(info);
 
     device["info"] = info;
