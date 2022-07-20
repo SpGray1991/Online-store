@@ -1,11 +1,9 @@
 import { Card } from "react-bootstrap";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
-import "./BrandBar.css";
 
 const BrandBar = () => {
-  const { devices, types, brands, selectedType, selectedBrand } =
-    useTypedSelector((state) => state.device);
+  const { brands, selectedBrand } = useTypedSelector((state) => state.device);
 
   const { setSelectedBrand } = useActions();
 

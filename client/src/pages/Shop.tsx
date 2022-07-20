@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { useEffect } from "react";
+import { Col, Row, Container } from "react-bootstrap";
 import TypeBar from "../components/TypeBar/TypeBar";
 import BrandBar from "../components/BrandBar/BrandBar";
 import DeviceList from "../components/DeviceList/DeviceList";
@@ -14,8 +12,7 @@ const Shop = () => {
     (state) => state.device
   );
 
-  const { setTypes, setBrands, setDevices, setLimit, setPage, setTotalCount } =
-    useActions();
+  const { setTypes, setBrands, setDevices } = useActions();
 
   useEffect(() => {
     setTypes();

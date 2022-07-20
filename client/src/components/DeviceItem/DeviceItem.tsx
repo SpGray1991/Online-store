@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { DEVICE_ROUTE } from "../../utils/consts";
 import "./DeviceItem.css";
 
-const DeviceItem = ({ id, name, price, rating, img }: IDevice) => {
+const DeviceItem = ({ id, name, rating, img }: IDevice) => {
   const navigate = useNavigate();
   return (
     <Col

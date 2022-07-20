@@ -1,10 +1,5 @@
 import { Dispatch } from "redux";
-import {
-  fetchBrands,
-  fetchDevices,
-  fetchOneDevice,
-  fetchTypes,
-} from "../../http/deviceApi";
+import { fetchBrands, fetchDevices, fetchTypes } from "../../http/deviceApi";
 import {
   IType,
   DeviceAction,

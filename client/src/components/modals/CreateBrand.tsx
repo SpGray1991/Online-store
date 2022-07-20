@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import { Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
 import { createBrand } from "../../http/deviceApi";
 import { ModalProps } from "../../types/DeviceType";
 

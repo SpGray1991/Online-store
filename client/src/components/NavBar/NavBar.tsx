@@ -1,15 +1,12 @@
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
+import { Button, Nav, Container, Navbar } from "react-bootstrap";
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../../utils/consts";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { useActions } from "../../hooks/useActions";
 
 const NavBar = () => {
-  const { user, isAuth } = useTypedSelector((state) => state.user);
+  const { isAuth } = useTypedSelector((state) => state.user);
 
   const navigate = useNavigate();
 

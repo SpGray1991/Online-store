@@ -11,8 +11,6 @@ class DeviceController {
       let fileName = uuid.v4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
 
-      console.log("device", name);
-
       const device = await Device.query().insert({
         name,
         price,
@@ -81,7 +79,6 @@ class DeviceController {
     const info = Array.from(
       await DeviceInfo.query().where("device_id", "=", id)
     );
-    console.log(info);
 
     device["info"] = info;
 

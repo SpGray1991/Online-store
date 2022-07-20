@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Dropdown, Form, Row, Col, Modal } from "react-bootstrap";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
-import { IDevice, Info } from "../../types/DeviceType";
 import { createDevice } from "../../http/deviceApi";
-import { ModalProps } from "../../types/DeviceType";
+import { ModalProps, Info } from "../../types/DeviceType";
 
 const CreateDevice = ({ show, onHide }: ModalProps) => {
-  const { devices, types, brands, selectedType, selectedBrand } =
-    useTypedSelector((state) => state.device);
+  const { types, brands, selectedType, selectedBrand } = useTypedSelector(
+    (state) => state.device
+  );
 
   const { setSelectedType, setSelectedBrand, setBrands, setTypes } =
     useActions();
@@ -41,7 +40,6 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
   };
 
   const addDevice = () => {
-    console.log("INFO", info);
     const formData: any = new FormData();
     formData.append("name", name);
     formData.append("price", `${price}`);
@@ -49,9 +47,6 @@ const CreateDevice = ({ show, onHide }: ModalProps) => {
     formData.append("brand_id", selectedBrand.id);
     formData.append("type_id", selectedType.id);
     formData.append("info", JSON.stringify(info));
-
-    console.log("Test", formData.get("info"));
-
     createDevice(formData).then((data) => onHide());
   };
 
